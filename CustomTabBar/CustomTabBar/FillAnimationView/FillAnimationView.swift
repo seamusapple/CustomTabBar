@@ -7,6 +7,22 @@
 
 import UIKit
 
+extension UIView {
+    private static var _needReAlignFillAnimationView = [String: Bool]()
+    
+    var needReAlignFillAnimationView: Bool {
+        get {
+            let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            return UIView._needReAlignFillAnimationView[tmpAddress] ?? false
+        }
+        
+        set(newValue) {
+            let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            UIView._needReAlignFillAnimationView[tmpAddress] = newValue
+        }
+    }
+}
+
 class FillAnimationView: UIView {
     // MARK: - Public Properties
     var fillColor = UIColor(named: "DeepSaffron") {
@@ -35,6 +51,7 @@ class FillAnimationView: UIView {
         super.layoutSubviews()
         
         backImageView.frame = bounds
+        guard !needReAlignFillAnimationView else { return }
         fillAnimationView.frame = bounds
         fillAnimationView.frame.origin.y = bounds.height
     }

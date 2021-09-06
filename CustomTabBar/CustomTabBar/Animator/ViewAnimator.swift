@@ -95,15 +95,14 @@ enum ViewAnimationFactory {
     
     static func makeFillCenterwardsAnimation(duration: TimeInterval, delayFactor: TimeInterval) -> ViewAnimationBlock {
         return { fillColorView, animatedView in
-            fillColorView.frame = animatedView.bounds
+            animatedView.needReAlignFillAnimationView = true
+            fillColorView.frame = CGRect.zero
             fillColorView.center = CGPoint(x: animatedView.bounds.midX, y: animatedView.bounds.midY)
-            fillColorView.frame.size = CGSize.zero
             UIView.animate(
                 withDuration: duration,
                 delay: delayFactor) {
                 fillColorView.frame = animatedView.bounds
                 fillColorView.center = CGPoint(x: animatedView.bounds.midX, y: animatedView.bounds.midY)
-                print(fillColorView.frame)
             }
         }
     }

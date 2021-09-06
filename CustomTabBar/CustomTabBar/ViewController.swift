@@ -51,7 +51,6 @@ class ViewController: UIViewController {
     
     // MARK: - Event Responses
     @objc private func refreshAnimation() {
-        guard count < 4 else { return }
         self.fillAnimatedImageOne.fillColor = randomFillColor()
         let animatorUpwards = randomAnimation()
         animatorUpwards.animated(fillColorView: self.fillAnimatedImageOne.animationView, animatedView: self.fillAnimatedImageOne)
