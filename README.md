@@ -1,4 +1,11 @@
 # CustomTabBar
  CustomTabBar with animation
 
-![Icon Fill Animation](https://github.com/seamusapple/CustomTabBar/blob/main/FillIconAnimation.gif)
+ Add Five animation type for icon fill color:
+ - Fill from left to right
+ - Fill from right to left
+ - Fill from top to bottom
+ - Fill from bottom to top
+ - Fill from center to extend
+
+![Icon Fill Animation](https://github.com/seamusapple/CustomTabBar/blob/main/Fill%20Icon%20Animation.gif)
