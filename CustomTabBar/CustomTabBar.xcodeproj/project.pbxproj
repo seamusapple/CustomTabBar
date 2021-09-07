@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		582A47AB26E7BBBE00E2F66A /* BottomStackItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582A47AA26E7BBBE00E2F66A /* BottomStackItem.swift */; };
+		582A47AD26E7BCBA00E2F66A /* RootStackTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582A47AC26E7BCBA00E2F66A /* RootStackTabViewController.swift */; };
+		582A47AF26E7BD1900E2F66A /* StackItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582A47AE26E7BD1900E2F66A /* StackItemView.swift */; };
 		5856DDA926E4616500467F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5856DDA826E4616500467F6B /* AppDelegate.swift */; };
 		5856DDAB26E4616500467F6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5856DDAA26E4616500467F6B /* SceneDelegate.swift */; };
 		5856DDAD26E4616500467F6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5856DDAC26E4616500467F6B /* ViewController.swift */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		582A47AA26E7BBBE00E2F66A /* BottomStackItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomStackItem.swift; sourceTree = "<group>"; };
+		582A47AC26E7BCBA00E2F66A /* RootStackTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStackTabViewController.swift; sourceTree = "<group>"; };
+		582A47AE26E7BD1900E2F66A /* StackItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackItemView.swift; sourceTree = "<group>"; };
 		5856DDA526E4616500467F6B /* CustomTabBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomTabBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5856DDA826E4616500467F6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5856DDAA26E4616500467F6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,17 +58,11 @@
 		582A47A726E7BB8000E2F66A /* CustomTabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				582A47A926E7BBAE00E2F66A /* BasicItem */,
+				582A47AA26E7BBBE00E2F66A /* BottomStackItem.swift */,
+				582A47AE26E7BD1900E2F66A /* StackItemView.swift */,
+				582A47AC26E7BCBA00E2F66A /* RootStackTabViewController.swift */,
 			);
 			path = CustomTabBarController;
-			sourceTree = "<group>";
-		};
-		582A47A926E7BBAE00E2F66A /* BasicItem */ = {
-			isa = PBXGroup;
-			children = (
-				582A47AA26E7BBBE00E2F66A /* BottomStackItem.swift */,
-			);
-			path = BasicItem;
 			sourceTree = "<group>";
 		};
 		5856DD9C26E4616500467F6B = {
@@ -191,6 +189,8 @@
 				5856DDAD26E4616500467F6B /* ViewController.swift in Sources */,
 				5856DDA926E4616500467F6B /* AppDelegate.swift in Sources */,
 				582A47AB26E7BBBE00E2F66A /* BottomStackItem.swift in Sources */,
+				582A47AD26E7BCBA00E2F66A /* RootStackTabViewController.swift in Sources */,
+				582A47AF26E7BD1900E2F66A /* StackItemView.swift in Sources */,
 				5856DDAB26E4616500467F6B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
