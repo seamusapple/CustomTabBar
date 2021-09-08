@@ -40,7 +40,6 @@ class StackItemView: UIView {
     
     // MARK: - Super Override
     override func layoutMarginsDidChange() {
-        print(highlightView.frame)
         highlightView.layer.cornerRadius = (bounds.height-20-safeAreaInsets.bottom)/2
     }
     
@@ -96,9 +95,11 @@ class StackItemView: UIView {
     
     private func updateUI(isSelected: Bool) {
         guard let model = item as? BottomStackItem else { return }
+        self.imgView.fillColor = isSelected ? UIColor(named: "DeepSaffron") : UIColor.clear
+        let imgAnimator = ViewAnimator(animation: ViewAnimation.fillCenterwards(duration: 1, delay: 0).getAnimation())
+        imgAnimator.animated(fillColorView: self.imgView.animationView, animatedView: self.imgView)
         model.isSelected = isSelected
         let options: UIView.AnimationOptions = isSelected ? [.curveEaseIn] : [.curveEaseOut]
-        
         UIView.animate(withDuration: 0.4,
                        delay: 0.0,
                        usingSpringWithDamping: 1.0,
@@ -114,7 +115,7 @@ class StackItemView: UIView {
 
     // MARK: - Private Properties
     private var titleLabel = UILabel()
-    private var imgView = UIImageView()
+    private var imgView = FillAnimationView()
     private var highlightView = UIView()
 }
 

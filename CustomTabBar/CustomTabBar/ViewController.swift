@@ -52,8 +52,8 @@ class ViewController: UIViewController {
     // MARK: - Event Responses
     @objc private func refreshAnimation() {
         self.fillAnimatedImageOne.fillColor = randomFillColor()
-        let animatorUpwards = randomAnimation()
-        animatorUpwards.animated(fillColorView: self.fillAnimatedImageOne.animationView, animatedView: self.fillAnimatedImageOne)
+        let randomAnimator = randomAnimation()
+        randomAnimator.animated(fillColorView: self.fillAnimatedImageOne.animationView, animatedView: self.fillAnimatedImageOne)
         count += 1
     }
     
