@@ -39,6 +39,10 @@ class StackItemView: UIView {
     }
     
     // MARK: - Super Override
+    override func layoutMarginsDidChange() {
+        print(highlightView.frame)
+        highlightView.layer.cornerRadius = (bounds.height-20-safeAreaInsets.bottom)/2
+    }
     
     // MARK: - Private Properties
     private func initSubComponents() {
@@ -104,7 +108,6 @@ class StackItemView: UIView {
                         self.titleLabel.text = isSelected ? model.title : ""
                         let color = isSelected ? self.higlightBGColor : .white
                         self.highlightView.backgroundColor = color
-                        self.highlightView.layer.cornerRadius = self.highlightView.frame.height/2
                         (self.superview as? UIStackView)?.layoutIfNeeded()
                        }, completion: nil)
     }
