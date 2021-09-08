@@ -20,6 +20,7 @@ class RootStackTabViewController: UIViewController {
         initSubComponents()
         addSubComponents()
         layoutSubComponents()
+        setupTabs()
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,10 +34,11 @@ class RootStackTabViewController: UIViewController {
     
     // MARK: - Private Methods
     private func initSubComponents() {
+        view.backgroundColor = UIColor(named: "GlossyGrape")
         tabBackView.translatesAutoresizingMaskIntoConstraints = false
-        tabBackView.backgroundColor = .green
+        tabBackView.backgroundColor = .white
         tabContainerView.translatesAutoresizingMaskIntoConstraints = false
-        tabContainerView.backgroundColor = .gray
+        tabContainerView.backgroundColor = .clear
         tabContainerView.distribution = .equalSpacing
         tabContainerView.alignment = .fill
         tabContainerView.spacing = 0
@@ -64,6 +66,16 @@ class RootStackTabViewController: UIViewController {
         ])
     }
     
+    private func setupTabs() {
+        for (index, model) in self.tabModels.enumerated() {
+            let tabView = self.tabs[index]
+            model.isSelected = index == 0
+            tabView.item = model
+            tabView.delegate = self
+            self.tabContainerView.addArrangedSubview(tabView)
+        }
+    }
+    
     // MARK: - Event Responses
     
     // MARK: - Private Methods
@@ -71,4 +83,29 @@ class RootStackTabViewController: UIViewController {
     // MARK: - Private Properties
     private let tabBackView = UIView()
     private let tabContainerView = UIStackView()
+    
+    lazy var tabs: [StackItemView] = {
+        var items = [StackItemView]()
+        for _ in 0..<5 {
+            items.append(StackItemView())
+        }
+        return items
+    }()
+    
+    lazy var tabModels: [BottomStackItem] = {
+        return [
+            BottomStackItem(title: "Password", image: "48_1password"),
+            BottomStackItem(title: "Photo", image: "48_photo"),
+            BottomStackItem(title: "Shortcuts", image: "48_shortcuts"),
+            BottomStackItem(title: "Vsco", image: "48_vsco")
+        ]
+    }()
+}
+
+extension RootStackTabViewController: StackItemViewDelegate {
+    func handleTap(_ view: StackItemView) {
+        self.tabs[self.currentIndex].isSelected = false
+        view.isSelected = true
+        self.currentIndex = self.tabs.firstIndex(where: { $0 === view }) ?? 0
+    }
 }

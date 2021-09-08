@@ -38,6 +38,8 @@ class StackItemView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Super Override
+    
     // MARK: - Private Properties
     private func initSubComponents() {
         titleLabel.textAlignment = .left
@@ -47,6 +49,7 @@ class StackItemView: UIView {
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.contentMode = .scaleAspectFit
         highlightView.translatesAutoresizingMaskIntoConstraints = false
+        highlightView.layer.cornerRadius = 40
     }
     
     private func addSubComponents() {
@@ -57,20 +60,22 @@ class StackItemView: UIView {
     
     private func layoutSubComponents() {
         addConstraints([
-            NSLayoutConstraint(item: highlightView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 10),
-            NSLayoutConstraint(item: highlightView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -10),
-            NSLayoutConstraint(item: highlightView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: highlightView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: highlightView, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 10),
+            NSLayoutConstraint(item: highlightView, attribute: .bottom, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -10),
+            NSLayoutConstraint(item: highlightView, attribute: .left, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: highlightView, attribute: .right, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .right, multiplier: 1, constant: 0),
         ])
         addConstraints([
-            NSLayoutConstraint(item: imgView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: imgView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 15),
-            NSLayoutConstraint(item: imgView, attribute: .right, relatedBy: .equal, toItem: titleLabel, attribute: .left, multiplier: 1, constant: -5)
+            NSLayoutConstraint(item: imgView, attribute: .centerY, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .centerY, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: imgView, attribute: .left, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .left, multiplier: 1, constant: 15),
+            NSLayoutConstraint(item: imgView, attribute: .right, relatedBy: .equal, toItem: titleLabel, attribute: .left, multiplier: 1, constant: -5),
+            NSLayoutConstraint(item: imgView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30),
+            NSLayoutConstraint(item: imgView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
         ])
         addConstraints([
-            NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .centerY, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: imgView, attribute: .right, multiplier: 1, constant: 5),
-            NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 10)
+            NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .right, multiplier: 1, constant: -10)
         ])
         
     }
@@ -96,11 +101,12 @@ class StackItemView: UIView {
                        initialSpringVelocity: 0.5,
                        options: options,
                        animations: {
-            self.titleLabel.text = isSelected ? model.title : ""
-            let color = isSelected ? self.higlightBGColor : .white
-            self.highlightView.backgroundColor = color
-            (self.superview as? UIStackView)?.layoutIfNeeded()
-        }, completion: nil)
+                        self.titleLabel.text = isSelected ? model.title : ""
+                        let color = isSelected ? self.higlightBGColor : .white
+                        self.highlightView.backgroundColor = color
+                        self.highlightView.layer.cornerRadius = self.highlightView.frame.height/2
+                        (self.superview as? UIStackView)?.layoutIfNeeded()
+                       }, completion: nil)
     }
 
     // MARK: - Private Properties
