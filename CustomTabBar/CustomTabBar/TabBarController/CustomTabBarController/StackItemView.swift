@@ -43,7 +43,10 @@ class StackItemView: UIView {
         titleLabel.textAlignment = .left
         titleLabel.textColor = UIColor.black
         titleLabel.font = UIFont(name: "AvenirNext-Regular", size: 16)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.contentMode = .scaleAspectFit
+        highlightView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func addSubComponents() {
@@ -53,9 +56,23 @@ class StackItemView: UIView {
     }
     
     private func layoutSubComponents() {
-        highlightView.frame = CGRect(x: 0, y: 10, width: bounds.width, height: bounds.height-20)
-        imgView.frame = CGRect(x: 15, y: (bounds.height-30)/2, width: 30, height: 30)
-        titleLabel.frame = CGRect(x: 50, y: (bounds.height-25)/2, width: bounds.width-60, height: 25)
+        addConstraints([
+            NSLayoutConstraint(item: highlightView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 10),
+            NSLayoutConstraint(item: highlightView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -10),
+            NSLayoutConstraint(item: highlightView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: highlightView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 0),
+        ])
+        addConstraints([
+            NSLayoutConstraint(item: imgView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: imgView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 15),
+            NSLayoutConstraint(item: imgView, attribute: .right, relatedBy: .equal, toItem: titleLabel, attribute: .left, multiplier: 1, constant: -5)
+        ])
+        addConstraints([
+            NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: imgView, attribute: .right, multiplier: 1, constant: 5),
+            NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 10)
+        ])
+        
     }
     
     // MARK: - Event Response
