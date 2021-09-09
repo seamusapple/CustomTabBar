@@ -7,6 +7,20 @@
 
 import UIKit
 
+extension UIWindow {
+    static var isLandscape: Bool {
+        if #available(iOS 13.0, *) {
+            return UIApplication.shared.windows
+                .first?
+                .windowScene?
+                .interfaceOrientation
+                .isLandscape ?? false
+        } else {
+            return UIApplication.shared.statusBarOrientation.isLandscape
+        }
+    }
+}
+
 class RootStackTabViewController: UIViewController {
     // MARK: - Public Methods
     
@@ -35,6 +49,16 @@ class RootStackTabViewController: UIViewController {
     // MARK: - Init Methods
     
     // MARK: - Super Override
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate { _ in
+            if UIWindow.isLandscape {
+                
+            } else {
+                
+            }
+        }
+        super.viewWillTransition(to: size, with: coordinator)
+    }
     
     // MARK: - Private Methods
     private func initSubComponents() {
@@ -66,7 +90,6 @@ class RootStackTabViewController: UIViewController {
             NSLayoutConstraint(item: tabContainerView, attribute: .right, relatedBy: .equal, toItem: tabBackView, attribute: .right, multiplier: 1, constant: -15),
             NSLayoutConstraint(item: tabContainerView, attribute: .top, relatedBy: .equal, toItem: tabBackView, attribute: .top, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: tabContainerView, attribute: .bottom, relatedBy: .equal, toItem: tabBackView, attribute: .bottom, multiplier: 1, constant: 0)
-            
         ])
     }
     
