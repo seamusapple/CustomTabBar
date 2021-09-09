@@ -14,7 +14,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        
     }
     
     override func didReceiveMemoryWarning() {

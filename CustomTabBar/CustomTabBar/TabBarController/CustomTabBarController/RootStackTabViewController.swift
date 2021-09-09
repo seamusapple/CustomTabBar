@@ -23,6 +23,10 @@ class RootStackTabViewController: UIViewController {
         setupTabs()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        handleTap(self.tabs[self.currentIndex])
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -69,7 +73,7 @@ class RootStackTabViewController: UIViewController {
     private func setupTabs() {
         for (index, model) in self.tabModels.enumerated() {
             let tabView = self.tabs[index]
-            model.isSelected = index == 0
+            model.isSelected = index == currentIndex
             tabView.item = model
             tabView.delegate = self
             self.tabContainerView.addArrangedSubview(tabView)
