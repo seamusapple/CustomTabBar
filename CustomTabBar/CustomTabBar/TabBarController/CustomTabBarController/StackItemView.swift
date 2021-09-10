@@ -96,7 +96,7 @@ class StackItemView: UIView {
     
     private func updateUI(isSelected: Bool) {
         guard let model = item as? BottomStackItem else { return }
-        self.imgView.fillColor = isSelected ? UIColor(named: "DeepSaffron") : UIColor.clear
+        self.imgView.fillColor = isSelected ? model.highlightColor : UIColor.clear
         if isIconFillAnimation {
             let imgAnimator = ViewAnimator(animation: ViewAnimation.fillCenterwards(duration: 0.4, delay: 0).getAnimation())
             imgAnimator.animated(fillColorView: self.imgView.animationView, animatedView: self.imgView)
@@ -112,7 +112,7 @@ class StackItemView: UIView {
                        options: options,
                        animations: {
                         self.titleLabel.text = isSelected ? model.title : ""
-                        self.titleLabel.textColor = isSelected ? UIColor(named: "DeepSaffron") : UIColor.black
+                        self.titleLabel.textColor = isSelected ? model.highlightColor : UIColor.black
                         self.titleLabel.font = isSelected ? UIFont(name: "AvenirNext-Bold", size: 16) : UIFont(name: "AvenirNext-Regular", size: 16)
                         let color = isSelected ? self.higlightBGColor : .white
                         self.highlightView.backgroundColor = color

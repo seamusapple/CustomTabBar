@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setupView() {
-        view.backgroundColor = UIColor(named: "BackColor")?.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor(named: "CaribbeanGreen")?.withAlphaComponent(0.5)
         fillAnimatedImageOne.frame.origin = CGPoint(x: (view.bounds.width-206)/2, y: (view.bounds.height-206)/2)
         fillAnimatedImageOne.frame.size = CGSize(width: 206, height: 206)
         createFillView(animationView: fillAnimatedImageOne, color: UIColor(named: "YelloCrayola"), imageName: "512_padlock")

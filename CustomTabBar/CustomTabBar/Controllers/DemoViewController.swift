@@ -12,6 +12,6 @@ class DemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(named: "BlueJeans")
+        view.backgroundColor = UIColor(named: "BlueJeans")?.withAlphaComponent(0.5)
     }
 }

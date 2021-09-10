@@ -27,7 +27,7 @@ class RootStackTabViewController: UIViewController {
     // MARK: - Public Properties
     var currentIndex = 0
     var viewControllers: [UIViewController] = []
-    
+    var tabModels: [BottomStackItem] = []
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,7 @@ class RootStackTabViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        guard self.currentIndex < self.tabs.count-1 else { return }
         updateController(with: nil, tabItemView: self.tabs[self.currentIndex])
     }
     
@@ -143,21 +144,14 @@ class RootStackTabViewController: UIViewController {
     private let tabContainerView = UIStackView()
     private let controllerContainerView = UIView()
     
-    lazy var tabs: [StackItemView] = {
+    private lazy var tabs: [StackItemView] = {
         var items = [StackItemView]()
-        for _ in 0..<5 {
-            items.append(StackItemView())
+        for tabModel in tabModels {
+            let stackItemView = StackItemView()
+            stackItemView.higlightBGColor = tabModel.highlightColor?.withAlphaComponent(0.2)
+            items.append(stackItemView)
         }
         return items
-    }()
-    
-    lazy var tabModels: [BottomStackItem] = {
-        return [
-            BottomStackItem(title: "Password", image: "48_1password"),
-            BottomStackItem(title: "Photo", image: "48_photo"),
-            BottomStackItem(title: "Shortcuts", image: "48_shortcuts"),
-            BottomStackItem(title: "Vsco", image: "48_vsco")
-        ]
     }()
 }
 
