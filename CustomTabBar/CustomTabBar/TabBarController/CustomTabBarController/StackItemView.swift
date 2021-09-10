@@ -18,6 +18,7 @@ class StackItemView: UIView {
     // MARK: - Public Properties
     weak var delegate: StackItemViewDelegate?
     var higlightBGColor = UIColor(named: "CaribbeanGreen")
+    var isIconFillAnimation = false
     var isSelected: Bool = false {
         willSet { self.updateUI(isSelected: newValue) }
     }
@@ -96,8 +97,12 @@ class StackItemView: UIView {
     private func updateUI(isSelected: Bool) {
         guard let model = item as? BottomStackItem else { return }
         self.imgView.fillColor = isSelected ? UIColor(named: "DeepSaffron") : UIColor.clear
-        let imgAnimator = ViewAnimator(animation: ViewAnimation.fillCenterwards(duration: 0.4, delay: 0).getAnimation())
-        imgAnimator.animated(fillColorView: self.imgView.animationView, animatedView: self.imgView)
+        if isIconFillAnimation {
+            let imgAnimator = ViewAnimator(animation: ViewAnimation.fillCenterwards(duration: 0.4, delay: 0).getAnimation())
+            imgAnimator.animated(fillColorView: self.imgView.animationView, animatedView: self.imgView)
+        } else {
+            isSelected ? self.imgView.fillImageWithoutAnimation() : self.imgView.unfillImageWithoutAnimation()
+        }
         model.isSelected = isSelected
         let options: UIView.AnimationOptions = isSelected ? [.curveEaseIn] : [.curveEaseOut]
         UIView.animate(withDuration: 0.4,

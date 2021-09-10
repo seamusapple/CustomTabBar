@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5829E51126EB54C1002FD1C5 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5829E51026EB54C1002FD1C5 /* DemoViewController.swift */; };
+		5829E51326EB54CA002FD1C5 /* DemoViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5829E51226EB54CA002FD1C5 /* DemoViewController1.swift */; };
+		5829E51526EB54D1002FD1C5 /* DemoViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5829E51426EB54D1002FD1C5 /* DemoViewController2.swift */; };
 		582A47AB26E7BBBE00E2F66A /* BottomStackItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582A47AA26E7BBBE00E2F66A /* BottomStackItem.swift */; };
 		582A47AD26E7BCBA00E2F66A /* RootStackTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582A47AC26E7BCBA00E2F66A /* RootStackTabViewController.swift */; };
 		582A47AF26E7BD1900E2F66A /* StackItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582A47AE26E7BD1900E2F66A /* StackItemView.swift */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5829E51026EB54C1002FD1C5 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		5829E51226EB54CA002FD1C5 /* DemoViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController1.swift; sourceTree = "<group>"; };
+		5829E51426EB54D1002FD1C5 /* DemoViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController2.swift; sourceTree = "<group>"; };
 		582A47AA26E7BBBE00E2F66A /* BottomStackItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomStackItem.swift; sourceTree = "<group>"; };
 		582A47AC26E7BCBA00E2F66A /* RootStackTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStackTabViewController.swift; sourceTree = "<group>"; };
 		582A47AE26E7BD1900E2F66A /* StackItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackItemView.swift; sourceTree = "<group>"; };
@@ -47,6 +53,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5829E51626EB54ED002FD1C5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5856DDAC26E4616500467F6B /* ViewController.swift */,
+				5829E51026EB54C1002FD1C5 /* DemoViewController.swift */,
+				5829E51226EB54CA002FD1C5 /* DemoViewController1.swift */,
+				5829E51426EB54D1002FD1C5 /* DemoViewController2.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		582A47A626E7BB6000E2F66A /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
@@ -58,9 +75,9 @@
 		582A47A726E7BB8000E2F66A /* CustomTabBarController */ = {
 			isa = PBXGroup;
 			children = (
+				582A47AC26E7BCBA00E2F66A /* RootStackTabViewController.swift */,
 				582A47AA26E7BBBE00E2F66A /* BottomStackItem.swift */,
 				582A47AE26E7BD1900E2F66A /* StackItemView.swift */,
-				582A47AC26E7BCBA00E2F66A /* RootStackTabViewController.swift */,
 			);
 			path = CustomTabBarController;
 			sourceTree = "<group>";
@@ -84,12 +101,12 @@
 		5856DDA726E4616500467F6B /* CustomTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				5829E51626EB54ED002FD1C5 /* Controllers */,
 				582A47A626E7BB6000E2F66A /* TabBarController */,
 				5856DDBF26E47A3400467F6B /* Animator */,
 				5856DDBC26E4631500467F6B /* FillAnimationView */,
 				5856DDA826E4616500467F6B /* AppDelegate.swift */,
 				5856DDAA26E4616500467F6B /* SceneDelegate.swift */,
-				5856DDAC26E4616500467F6B /* ViewController.swift */,
 				5856DDAE26E4616500467F6B /* Main.storyboard */,
 				5856DDB126E4616700467F6B /* Assets.xcassets */,
 				5856DDB326E4616700467F6B /* LaunchScreen.storyboard */,
@@ -187,7 +204,10 @@
 				5856DDC126E47A6E00467F6B /* ViewAnimator.swift in Sources */,
 				5856DDBE26E4633E00467F6B /* FillAnimationView.swift in Sources */,
 				5856DDAD26E4616500467F6B /* ViewController.swift in Sources */,
+				5829E51126EB54C1002FD1C5 /* DemoViewController.swift in Sources */,
+				5829E51526EB54D1002FD1C5 /* DemoViewController2.swift in Sources */,
 				5856DDA926E4616500467F6B /* AppDelegate.swift in Sources */,
+				5829E51326EB54CA002FD1C5 /* DemoViewController1.swift in Sources */,
 				582A47AB26E7BBBE00E2F66A /* BottomStackItem.swift in Sources */,
 				582A47AD26E7BCBA00E2F66A /* RootStackTabViewController.swift in Sources */,
 				582A47AF26E7BD1900E2F66A /* StackItemView.swift in Sources */,

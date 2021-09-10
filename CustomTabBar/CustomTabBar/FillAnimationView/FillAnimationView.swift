@@ -24,6 +24,15 @@ extension UIView {
 }
 
 class FillAnimationView: UIView {
+    // MARK: - Public Methods
+    func fillImageWithoutAnimation() {
+        fillAnimationView.frame = bounds
+    }
+    
+    func unfillImageWithoutAnimation() {
+        fillAnimationView.frame = CGRect.zero
+    }
+    
     // MARK: - Public Properties
     var fillColor = UIColor(named: "DeepSaffron") {
         didSet { fillAnimationView.backgroundColor = fillColor }

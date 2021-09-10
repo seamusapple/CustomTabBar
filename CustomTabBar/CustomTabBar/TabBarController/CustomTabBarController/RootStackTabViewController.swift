@@ -26,6 +26,7 @@ class RootStackTabViewController: UIViewController {
     
     // MARK: - Public Properties
     var currentIndex = 0
+    var viewControllers: [UIViewController] = []
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -35,10 +36,11 @@ class RootStackTabViewController: UIViewController {
         addSubComponents()
         layoutSubComponents()
         setupTabs()
+        setupController()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        handleTap(self.tabs[self.currentIndex])
+        updateController(with: nil, tabItemView: self.tabs[self.currentIndex])
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,7 +64,9 @@ class RootStackTabViewController: UIViewController {
     
     // MARK: - Private Methods
     private func initSubComponents() {
-        view.backgroundColor = UIColor(named: "GlossyGrape")
+        view.backgroundColor = .clear
+        controllerContainerView.backgroundColor = .clear
+        controllerContainerView.translatesAutoresizingMaskIntoConstraints = false
         tabBackView.translatesAutoresizingMaskIntoConstraints = false
         tabBackView.backgroundColor = .white
         tabContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,11 +78,18 @@ class RootStackTabViewController: UIViewController {
     }
     
     private func addSubComponents() {
+        view.addSubview(controllerContainerView)
         view.addSubview(tabBackView)
         tabBackView.addSubview(tabContainerView)
     }
     
     private func layoutSubComponents() {
+        view.addConstraints([
+            NSLayoutConstraint(item: controllerContainerView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controllerContainerView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controllerContainerView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controllerContainerView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.88, constant: 0)
+        ])
         view.addConstraints([
             NSLayoutConstraint(item: tabBackView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: tabBackView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0),
@@ -103,13 +114,34 @@ class RootStackTabViewController: UIViewController {
         }
     }
     
+    private func setupController(with previousIndex: Int? = nil) {
+        if let previous = previousIndex, previous < self.viewControllers.count {
+            let previousVC = self.viewControllers[previous]
+            previousVC.willMove(toParent: nil)
+            previousVC.view.removeFromSuperview()
+            previousVC.removeFromParent()
+        }
+        
+        guard self.currentIndex < self.viewControllers.count else { return }
+        let newVC = viewControllers[self.currentIndex]
+        self.addChild(newVC)
+        newVC.view.frame = self.controllerContainerView.bounds
+        self.controllerContainerView.addSubview(newVC.view)
+        newVC.didMove(toParent: self)
+    }
+    
     // MARK: - Event Responses
     
     // MARK: - Private Methods
+    private func updateController(with previousIndex: Int?, tabItemView: StackItemView) {
+        tabItemView.isSelected = true
+        setupController(with: previousIndex)
+    }
     
     // MARK: - Private Properties
     private let tabBackView = UIView()
     private let tabContainerView = UIStackView()
+    private let controllerContainerView = UIView()
     
     lazy var tabs: [StackItemView] = {
         var items = [StackItemView]()
@@ -131,8 +163,11 @@ class RootStackTabViewController: UIViewController {
 
 extension RootStackTabViewController: StackItemViewDelegate {
     func handleTap(_ view: StackItemView) {
-        self.tabs[self.currentIndex].isSelected = false
-        view.isSelected = true
-        self.currentIndex = self.tabs.firstIndex(where: { $0 === view }) ?? 0
+        let previousIndex = self.currentIndex
+        let newIndex = self.tabs.firstIndex(where: { $0 === view }) ?? 0
+        guard previousIndex != newIndex else { return }
+        self.tabs[previousIndex].isSelected = false
+        self.currentIndex = newIndex
+        updateController(with: previousIndex, tabItemView: view)
     }
 }
