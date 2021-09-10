@@ -19,11 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let rootViewController = RootStackTabViewController()
         rootViewController.viewControllers = [ViewController(), DemoViewController(), DemoViewController1(), DemoViewController2()]
         rootViewController.tabModels = [
-            BottomStackItem(title: "Password", image: "48_1password", highlightColor: UIColor(named: "CaribbeanGreen")),
-            BottomStackItem(title: "Photo", image: "48_photo", highlightColor: UIColor(named: "BlueJeans")),
-            BottomStackItem(title: "Shortcuts", image: "48_shortcuts", highlightColor: UIColor(named: "YelloCrayola")),
-            BottomStackItem(title: "Vsco", image: "48_vsco", highlightColor: UIColor(named: "Rose"))
+            BottomStackItem(title: "Password", image: "48_1password", highlightColor: UIColor(named: "CaribbeanGreen"), unhighlightColor: UIColor.white),
+            BottomStackItem(title: "Photo", image: "48_photo", highlightColor: UIColor(named: "BlueJeans"), unhighlightColor: UIColor.white),
+            BottomStackItem(title: "Shortcuts", image: "48_shortcuts", highlightColor: UIColor(named: "YelloCrayola"), unhighlightColor: UIColor.white),
+            BottomStackItem(title: "Vsco", image: "48_vsco", highlightColor: UIColor(named: "Rose"), unhighlightColor: UIColor.white)
         ]
+        rootViewController.tabBackColor = UIColor(named: "DarkWorld")
         window.rootViewController = rootViewController
         self.window = window
         window.makeKeyAndVisible()

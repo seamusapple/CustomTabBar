@@ -11,10 +11,12 @@ class BottomStackItem {
     init(title: String,
          image: String,
          highlightColor: UIColor? = UIColor.black,
+         unhighlightColor: UIColor? = UIColor.black,
          isSelected: Bool = false) {
         self.title = title
         self.image = image
         self.highlightColor = highlightColor
+        self.unhighlightColor = unhighlightColor
         self.isSelected = isSelected
     }
     
@@ -22,5 +24,6 @@ class BottomStackItem {
     var title: String
     var image: String
     var highlightColor: UIColor?
+    var unhighlightColor: UIColor?
     var isSelected : Bool
 }

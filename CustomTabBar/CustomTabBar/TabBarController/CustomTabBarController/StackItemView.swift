@@ -17,7 +17,8 @@ class StackItemView: UIView {
     
     // MARK: - Public Properties
     weak var delegate: StackItemViewDelegate?
-    var higlightBGColor = UIColor(named: "CaribbeanGreen")
+    var higlightBGColor: UIColor? = UIColor(named: "CaribbeanGreen")
+    var unhighlightBGColor: UIColor? = UIColor.white
     var isIconFillAnimation = false
     var isSelected: Bool = false {
         willSet { self.updateUI(isSelected: newValue) }
@@ -114,7 +115,7 @@ class StackItemView: UIView {
                         self.titleLabel.text = isSelected ? model.title : ""
                         self.titleLabel.textColor = isSelected ? model.highlightColor : UIColor.black
                         self.titleLabel.font = isSelected ? UIFont(name: "AvenirNext-Bold", size: 16) : UIFont(name: "AvenirNext-Regular", size: 16)
-                        let color = isSelected ? self.higlightBGColor : .white
+                        let color = isSelected ? self.higlightBGColor : self.unhighlightBGColor
                         self.highlightView.backgroundColor = color
                         (self.superview as? UIStackView)?.layoutIfNeeded()
                        }, completion: nil)

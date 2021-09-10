@@ -28,6 +28,7 @@ class RootStackTabViewController: UIViewController {
     var currentIndex = 0
     var viewControllers: [UIViewController] = []
     var tabModels: [BottomStackItem] = []
+    var tabBackColor: UIColor? = .white 
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +70,7 @@ class RootStackTabViewController: UIViewController {
         controllerContainerView.backgroundColor = .clear
         controllerContainerView.translatesAutoresizingMaskIntoConstraints = false
         tabBackView.translatesAutoresizingMaskIntoConstraints = false
-        tabBackView.backgroundColor = .white
+        tabBackView.backgroundColor = tabBackColor
         tabContainerView.translatesAutoresizingMaskIntoConstraints = false
         tabContainerView.backgroundColor = .clear
         tabContainerView.distribution = .equalSpacing
@@ -149,6 +150,7 @@ class RootStackTabViewController: UIViewController {
         for tabModel in tabModels {
             let stackItemView = StackItemView()
             stackItemView.higlightBGColor = tabModel.highlightColor?.withAlphaComponent(0.2)
+            stackItemView.unhighlightBGColor = tabModel.unhighlightColor
             items.append(stackItemView)
         }
         return items
