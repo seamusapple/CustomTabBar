@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		581A101E26ECEA4C00E884F4 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A101D26ECEA4C00E884F4 /* CustomTabBarController.swift */; };
 		5829E51126EB54C1002FD1C5 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5829E51026EB54C1002FD1C5 /* DemoViewController.swift */; };
 		5829E51326EB54CA002FD1C5 /* DemoViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5829E51226EB54CA002FD1C5 /* DemoViewController1.swift */; };
 		5829E51526EB54D1002FD1C5 /* DemoViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5829E51426EB54D1002FD1C5 /* DemoViewController2.swift */; };
@@ -21,9 +22,11 @@
 		5856DDB526E4616700467F6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5856DDB326E4616700467F6B /* LaunchScreen.storyboard */; };
 		5856DDBE26E4633E00467F6B /* FillAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5856DDBD26E4633E00467F6B /* FillAnimationView.swift */; };
 		5856DDC126E47A6E00467F6B /* ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5856DDC026E47A6E00467F6B /* ViewAnimator.swift */; };
+		5888F3B426ECF469002C2C9D /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5888F3B326ECF469002C2C9D /* CustomTabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		581A101D26ECEA4C00E884F4 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		5829E51026EB54C1002FD1C5 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		5829E51226EB54CA002FD1C5 /* DemoViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController1.swift; sourceTree = "<group>"; };
 		5829E51426EB54D1002FD1C5 /* DemoViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController2.swift; sourceTree = "<group>"; };
@@ -40,6 +43,7 @@
 		5856DDB626E4616700467F6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5856DDBD26E4633E00467F6B /* FillAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillAnimationView.swift; sourceTree = "<group>"; };
 		5856DDC026E47A6E00467F6B /* ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimator.swift; sourceTree = "<group>"; };
+		5888F3B326ECF469002C2C9D /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		581A101C26ECEA1400E884F4 /* CustomDrawingTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				581A101D26ECEA4C00E884F4 /* CustomTabBarController.swift */,
+				5888F3B326ECF469002C2C9D /* CustomTabBar.swift */,
+			);
+			path = CustomDrawingTabBarController;
+			sourceTree = "<group>";
+		};
 		5829E51626EB54ED002FD1C5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -67,19 +80,20 @@
 		582A47A626E7BB6000E2F66A /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				582A47A726E7BB8000E2F66A /* CustomTabBarController */,
+				581A101C26ECEA1400E884F4 /* CustomDrawingTabBarController */,
+				582A47A726E7BB8000E2F66A /* ExtendAnimationTabBarController */,
 			);
 			path = TabBarController;
 			sourceTree = "<group>";
 		};
-		582A47A726E7BB8000E2F66A /* CustomTabBarController */ = {
+		582A47A726E7BB8000E2F66A /* ExtendAnimationTabBarController */ = {
 			isa = PBXGroup;
 			children = (
 				582A47AC26E7BCBA00E2F66A /* RootStackTabViewController.swift */,
 				582A47AA26E7BBBE00E2F66A /* BottomStackItem.swift */,
 				582A47AE26E7BD1900E2F66A /* StackItemView.swift */,
 			);
-			path = CustomTabBarController;
+			path = ExtendAnimationTabBarController;
 			sourceTree = "<group>";
 		};
 		5856DD9C26E4616500467F6B = {
@@ -203,6 +217,8 @@
 			files = (
 				5856DDC126E47A6E00467F6B /* ViewAnimator.swift in Sources */,
 				5856DDBE26E4633E00467F6B /* FillAnimationView.swift in Sources */,
+				581A101E26ECEA4C00E884F4 /* CustomTabBarController.swift in Sources */,
+				5888F3B426ECF469002C2C9D /* CustomTabBar.swift in Sources */,
 				5856DDAD26E4616500467F6B /* ViewController.swift in Sources */,
 				5829E51126EB54C1002FD1C5 /* DemoViewController.swift in Sources */,
 				5829E51526EB54D1002FD1C5 /* DemoViewController2.swift in Sources */,

@@ -53,16 +53,6 @@ class RootStackTabViewController: UIViewController {
     // MARK: - Init Methods
     
     // MARK: - Super Override
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate { _ in
-            if UIWindow.isLandscape {
-                
-            } else {
-                
-            }
-        }
-        super.viewWillTransition(to: size, with: coordinator)
-    }
     
     // MARK: - Private Methods
     private func initSubComponents() {
