@@ -9,8 +9,11 @@ import UIKit
 
 @IBDesignable
 class TroughAnimationTabBar: UITabBar {
+    var currentSelectedIndex: Int = 0
+    var nextIndex: Int = 0
     func animationTabBar() {
-        print("Need animation")
+        print("Need animation from index: \(currentSelectedIndex) to index: \(nextIndex)")
+        self.currentSelectedIndex = self.nextIndex
     }
     
     private var shapeLayer: CALayer?

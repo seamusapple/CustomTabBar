@@ -36,6 +36,9 @@ class TroughAnimationTabBarController: UITabBarController {
         setupAnimationBall()
         self.delegate = self
         self.selectedIndex = 1
+        guard self.tabBar is TroughAnimationTabBar else { return }
+        let troughTabBar = self.tabBar as! TroughAnimationTabBar
+        troughTabBar.currentSelectedIndex = 1
     }
     
     private func setupTabBar() {
@@ -98,6 +101,8 @@ extension TroughAnimationTabBarController: UITabBarControllerDelegate {
         }
         guard self.tabBar is TroughAnimationTabBar else { return }
         let troughTabBar = self.tabBar as! TroughAnimationTabBar
+        troughTabBar.currentSelectedIndex = self.selectedIndex
+        troughTabBar.nextIndex = item.tag
         troughTabBar.animationTabBar()
     }
 }
