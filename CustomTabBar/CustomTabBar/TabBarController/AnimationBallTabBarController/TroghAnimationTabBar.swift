@@ -46,9 +46,11 @@ class TroghAnimationTabBar: UITabBar {
     
     fileprivate func addQuadCurvePathOne(_ path: UIBezierPath) {
         let centerWidth = self.frame.width/2
+        let centerHeight = self.frame.height/2
         path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: self.frame.width/2-32, y: 0))
-        path.addQuadCurve(to: CGPoint(x: self.frame.width/2+32, y: 0), controlPoint: CGPoint(x: centerWidth, y: self.frame.height*2/3))
+        path.addLine(to: CGPoint(x: centerWidth-60, y: 0))
+        path.addCurve(to: CGPoint(x: centerWidth, y: centerHeight), controlPoint1: CGPoint(x: centerWidth-20, y: 0), controlPoint2: CGPoint(x: centerWidth-35, y: centerHeight))
+        path.addCurve(to: CGPoint(x: centerWidth+60, y: 0), controlPoint1: CGPoint(x: centerWidth+35, y: centerHeight), controlPoint2: CGPoint(x: centerWidth+20, y: 0))
         path.addLine(to: CGPoint(x: self.frame.width, y: 0))
         path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
         path.addLine(to: CGPoint(x: 0, y: self.frame.height))
