@@ -8,7 +8,11 @@
 import UIKit
 
 @IBDesignable
-class TroghAnimationTabBar: UITabBar {
+class TroughAnimationTabBar: UITabBar {
+    func animationTabBar() {
+        print("Need animation")
+    }
+    
     private var shapeLayer: CALayer?
     
     private func addShape() {

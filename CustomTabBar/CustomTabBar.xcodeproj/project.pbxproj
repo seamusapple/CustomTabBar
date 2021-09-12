@@ -24,7 +24,7 @@
 		5856DDC126E47A6E00467F6B /* ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5856DDC026E47A6E00467F6B /* ViewAnimator.swift */; };
 		5888F3B426ECF469002C2C9D /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5888F3B326ECF469002C2C9D /* CustomTabBar.swift */; };
 		5888F3B726EDCA3C002C2C9D /* TroughAnimationTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5888F3B626EDCA3C002C2C9D /* TroughAnimationTabBarController.swift */; };
-		5888F3B926EDCB9D002C2C9D /* TroghAnimationTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5888F3B826EDCB9D002C2C9D /* TroghAnimationTabBar.swift */; };
+		5888F3B926EDCB9D002C2C9D /* TroughAnimationTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5888F3B826EDCB9D002C2C9D /* TroughAnimationTabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,7 @@
 		5856DDC026E47A6E00467F6B /* ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimator.swift; sourceTree = "<group>"; };
 		5888F3B326ECF469002C2C9D /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		5888F3B626EDCA3C002C2C9D /* TroughAnimationTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroughAnimationTabBarController.swift; sourceTree = "<group>"; };
-		5888F3B826EDCB9D002C2C9D /* TroghAnimationTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroghAnimationTabBar.swift; sourceTree = "<group>"; };
+		5888F3B826EDCB9D002C2C9D /* TroughAnimationTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroughAnimationTabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				5888F3B626EDCA3C002C2C9D /* TroughAnimationTabBarController.swift */,
-				5888F3B826EDCB9D002C2C9D /* TroghAnimationTabBar.swift */,
+				5888F3B826EDCB9D002C2C9D /* TroughAnimationTabBar.swift */,
 			);
 			path = AnimationBallTabBarController;
 			sourceTree = "<group>";
@@ -229,7 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5888F3B926EDCB9D002C2C9D /* TroghAnimationTabBar.swift in Sources */,
+				5888F3B926EDCB9D002C2C9D /* TroughAnimationTabBar.swift in Sources */,
 				5856DDC126E47A6E00467F6B /* ViewAnimator.swift in Sources */,
 				5856DDBE26E4633E00467F6B /* FillAnimationView.swift in Sources */,
 				581A101E26ECEA4C00E884F4 /* CustomTabBarController.swift in Sources */,

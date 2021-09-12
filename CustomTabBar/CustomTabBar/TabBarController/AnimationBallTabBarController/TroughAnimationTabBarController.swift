@@ -39,7 +39,7 @@ class TroughAnimationTabBarController: UITabBarController {
     }
     
     private func setupTabBar() {
-        let customTabBar = TroghAnimationTabBar()
+        let customTabBar = TroughAnimationTabBar()
         self.setValue(customTabBar, forKey: "tabBar")
     }
     
@@ -96,5 +96,8 @@ extension TroughAnimationTabBarController: UITabBarControllerDelegate {
         } else {
             animationButton.isSelected = true
         }
+        guard self.tabBar is TroughAnimationTabBar else { return }
+        let troughTabBar = self.tabBar as! TroughAnimationTabBar
+        troughTabBar.animationTabBar()
     }
 }
