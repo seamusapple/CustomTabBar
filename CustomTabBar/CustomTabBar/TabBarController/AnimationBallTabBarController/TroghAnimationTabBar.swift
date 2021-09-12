@@ -49,8 +49,8 @@ class TroghAnimationTabBar: UITabBar {
         let centerHeight = self.frame.height/2
         path.move(to: CGPoint(x: 0, y: 0))
         path.addLine(to: CGPoint(x: centerWidth-60, y: 0))
-        path.addCurve(to: CGPoint(x: centerWidth, y: centerHeight), controlPoint1: CGPoint(x: centerWidth-20, y: 0), controlPoint2: CGPoint(x: centerWidth-35, y: centerHeight))
-        path.addCurve(to: CGPoint(x: centerWidth+60, y: 0), controlPoint1: CGPoint(x: centerWidth+35, y: centerHeight), controlPoint2: CGPoint(x: centerWidth+20, y: 0))
+        path.addCurve(to: CGPoint(x: centerWidth, y: centerHeight), controlPoint1: CGPoint(x: centerWidth-20, y: centerHeight/8), controlPoint2: CGPoint(x: centerWidth-40, y: centerHeight*8.5/10))
+        path.addCurve(to: CGPoint(x: centerWidth+60, y: 0), controlPoint1: CGPoint(x: centerWidth+40, y: centerHeight*8.5/10), controlPoint2: CGPoint(x: centerWidth+20, y: centerHeight/8))
         path.addLine(to: CGPoint(x: self.frame.width, y: 0))
         path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
         path.addLine(to: CGPoint(x: 0, y: self.frame.height))

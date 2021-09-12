@@ -63,13 +63,13 @@ class TroughAnimationTabBarController: UITabBarController {
         animationButton = UIButton(frame: CGRect(x: (self.view.bounds.width/2)-25, y: -20, width: 50, height: 50))
         animationButton.setImage(UIImage(named: "32_tinder"), for: .normal)
         animationButton.setImage(UIImage(named: "32_tinder")?.withTintColor(UIColor(named: "DeepSaffron")!, renderingMode: .alwaysTemplate), for: .selected)
-        animationButton.layer.shadowColor = UIColor.white.cgColor
-        animationButton.layer.shadowOpacity = 0.1
-        animationButton.layer.shadowOffset = CGSize(width: 4, height: 4)
+        animationButton.layer.shadowColor = UIColor.black.cgColor
+        animationButton.layer.shadowOpacity = 0.15
+        animationButton.layer.shadowRadius = 2
+        animationButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         animationButton.imageView?.contentMode = .scaleAspectFit
         animationButton.isSelected = true
         animationButton.backgroundColor = UIColor(named: "GlossyGrape")
-        animationButton.layer.masksToBounds = true
         animationButton.layer.cornerRadius = 25
         animationButton.addTarget(self, action: #selector(animationButtonAction(sender:)), for: .touchUpInside)
         
