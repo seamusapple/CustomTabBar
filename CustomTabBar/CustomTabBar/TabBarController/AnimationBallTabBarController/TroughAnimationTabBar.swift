@@ -14,9 +14,16 @@ class TroughAnimationTabBar: UITabBar {
     func animationTabBar() {
         print("Need animation from index: \(currentSelectedIndex) to index: \(nextIndex)")
         self.currentSelectedIndex = self.nextIndex
+        addShape()
     }
     
     private var shapeLayer: CALayer?
+    
+    override func draw(_ rect: CGRect) {
+        self.addShape()
+        self.unselectedItemTintColor = .black
+        self.tintColor = UIColor(named: "DeepSaffron")
+    }
     
     private func addShape() {
         let shapeLayer = CAShapeLayer()
@@ -37,30 +44,33 @@ class TroughAnimationTabBar: UITabBar {
         }
         self.shapeLayer = shapeLayer
     }
-    
-    override func draw(_ rect: CGRect) {
-        self.addShape()
-        self.unselectedItemTintColor = .black
-        self.tintColor = UIColor(named: "DeepSaffron")
-    }
-    
+
     private func createPath() -> CGPath {
         let path = UIBezierPath()
-        addQuadCurvePathOne(path)
-        
-        return path.cgPath
-    }
-    
-    fileprivate func addQuadCurvePathOne(_ path: UIBezierPath) {
-        let centerWidth = self.frame.width/2
-        let centerHeight = self.frame.height/2
         path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: centerWidth-60, y: 0))
-        path.addCurve(to: CGPoint(x: centerWidth, y: centerHeight), controlPoint1: CGPoint(x: centerWidth-20, y: centerHeight/8), controlPoint2: CGPoint(x: centerWidth-40, y: centerHeight*8.5/10))
-        path.addCurve(to: CGPoint(x: centerWidth+60, y: 0), controlPoint1: CGPoint(x: centerWidth+40, y: centerHeight*8.5/10), controlPoint2: CGPoint(x: centerWidth+20, y: centerHeight/8))
+        drawCurve(path)
         path.addLine(to: CGPoint(x: self.frame.width, y: 0))
         path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
         path.addLine(to: CGPoint(x: 0, y: self.frame.height))
         path.close()
+        return path.cgPath
+    }
+    
+    private func drawCurve(_ path: UIBezierPath) {
+        let centerWidth = self.frame.width/2
+        let centerHeight = self.frame.height/2
+        if self.nextIndex == 1 {
+            path.addLine(to: CGPoint(x: centerWidth-60, y: 0))
+            path.addCurve(to: CGPoint(x: centerWidth, y: centerHeight), controlPoint1: CGPoint(x: centerWidth-20, y: centerHeight/8), controlPoint2: CGPoint(x: centerWidth-40, y: centerHeight*8.5/10))
+            path.addCurve(to: CGPoint(x: centerWidth+60, y: 0), controlPoint1: CGPoint(x: centerWidth+40, y: centerHeight*8.5/10), controlPoint2: CGPoint(x: centerWidth+20, y: centerHeight/8))
+        } else if nextIndex == 0 {
+            path.addLine(to: CGPoint(x: self.frame.width*1/6-60, y: 0))
+            path.addCurve(to: CGPoint(x: self.frame.width*1/6, y: centerHeight), controlPoint1: CGPoint(x: self.frame.width*1/6-20, y: centerHeight/8), controlPoint2: CGPoint(x: self.frame.width*1/6-40, y: centerHeight*8.5/10))
+            path.addCurve(to: CGPoint(x: self.frame.width*1/6+60, y: 0), controlPoint1: CGPoint(x: self.frame.width*1/6+40, y: centerHeight*8.5/10), controlPoint2: CGPoint(x: self.frame.width*1/6+20, y: centerHeight/8))
+        } else if nextIndex == 2 {
+            path.addLine(to: CGPoint(x: self.frame.width*5/6-60, y: 0))
+            path.addCurve(to: CGPoint(x: self.frame.width*5/6, y: centerHeight), controlPoint1: CGPoint(x: self.frame.width*5/6-20, y: centerHeight/8), controlPoint2: CGPoint(x: self.frame.width*5/6-40, y: centerHeight*8.5/10))
+            path.addCurve(to: CGPoint(x: self.frame.width*5/6+60, y: 0), controlPoint1: CGPoint(x: self.frame.width*5/6+40, y: centerHeight*8.5/10), controlPoint2: CGPoint(x: self.frame.width*5/6+20, y: centerHeight/8))
+        }
     }
 }
