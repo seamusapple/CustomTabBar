@@ -14,8 +14,9 @@ class TroughAnimationTabBar: UITabBar {
     var nextIndex: Int = 0
     var animationDuration: TimeInterval = 0.5
     var tabBarBackgroundColor = UIColor(named: "GlossyGrape")!
-    
-    // MARK: - Private Methods
+    var troughExtend: CGFloat = 60
+
+    // MARK: - Public Methods
     func animationTabBar() {
         guard self.currentSelectedIndex != self.nextIndex else { return }
         self.currentSelectedIndex = self.nextIndex
@@ -66,23 +67,29 @@ class TroughAnimationTabBar: UITabBar {
     }
     
     private func drawCurve(_ path: UIBezierPath) {
-        let centerWidth = self.frame.width/2
-        let centerHeight = self.frame.height/2
-        if self.nextIndex == 0 {
-            path.addLine(to: CGPoint(x: self.frame.width*1/6-60, y: 0))
-            path.addCurve(to: CGPoint(x: self.frame.width*1/6, y: centerHeight), controlPoint1: CGPoint(x: self.frame.width*1/6-20, y: centerHeight/8), controlPoint2: CGPoint(x: self.frame.width*1/6-40, y: centerHeight*8.5/10))
-            path.addCurve(to: CGPoint(x: self.frame.width*1/6+60, y: 0), controlPoint1: CGPoint(x: self.frame.width*1/6+40, y: centerHeight*8.5/10), controlPoint2: CGPoint(x: self.frame.width*1/6+20, y: centerHeight/8))
-        } else if nextIndex == 1 {
-            path.addLine(to: CGPoint(x: centerWidth-60, y: 0))
-            path.addCurve(to: CGPoint(x: centerWidth, y: centerHeight), controlPoint1: CGPoint(x: centerWidth-20, y: centerHeight/8), controlPoint2: CGPoint(x: centerWidth-40, y: centerHeight*8.5/10))
-            path.addCurve(to: CGPoint(x: centerWidth+60, y: 0), controlPoint1: CGPoint(x: centerWidth+40, y: centerHeight*8.5/10), controlPoint2: CGPoint(x: centerWidth+20, y: centerHeight/8))
-        } else if nextIndex == 2 {
-            path.addLine(to: CGPoint(x: self.frame.width*5/6-60, y: 0))
-            path.addCurve(to: CGPoint(x: self.frame.width*5/6, y: centerHeight), controlPoint1: CGPoint(x: self.frame.width*5/6-20, y: centerHeight/8), controlPoint2: CGPoint(x: self.frame.width*5/6-40, y: centerHeight*8.5/10))
-            path.addCurve(to: CGPoint(x: self.frame.width*5/6+60, y: 0), controlPoint1: CGPoint(x: self.frame.width*5/6+40, y: centerHeight*8.5/10), controlPoint2: CGPoint(x: self.frame.width*5/6+20, y: centerHeight/8))
-        }
+        guard let itemCount = self.items?.count, self.nextIndex < itemCount else { return }
+        let startPointX: CGFloat = CGFloat((self.nextIndex*2))*basicWidth+basicWidth-troughExtend
+        let curveOneTargetPointX: CGFloat = CGFloat((self.nextIndex*2))*basicWidth+basicWidth
+        let curveOneControlOnePointX: CGFloat = CGFloat((self.nextIndex*2))*basicWidth+basicWidth-troughExtend/3
+        let curveOneControlTwoPointX: CGFloat = CGFloat((self.nextIndex*2))*basicWidth+basicWidth-troughExtend*2/3
+        let curveTwoTargetPointX: CGFloat = CGFloat((self.nextIndex*2))*basicWidth+basicWidth+troughExtend
+        let curveTwoControlOnePointX: CGFloat = CGFloat((self.nextIndex*2))*basicWidth+basicWidth+troughExtend*2/3
+        let curveTwoControlTwoPointX: CGFloat = CGFloat((self.nextIndex*2))*basicWidth+basicWidth+troughExtend/3
+        let curveControlOnePointY: CGFloat = self.frame.height/2/8
+        let curveControlTwoPointY: CGFloat = self.frame.height/2*8.5/10
+        path.addLine(to: CGPoint(x: startPointX, y: 0))
+        path.addCurve(to: CGPoint(x: curveOneTargetPointX, y: self.frame.height/2),
+                      controlPoint1: CGPoint(x: curveOneControlOnePointX, y: curveControlOnePointY),
+                      controlPoint2: CGPoint(x: curveOneControlTwoPointX, y: curveControlTwoPointY))
+        path.addCurve(to: CGPoint(x: curveTwoTargetPointX, y: 0),
+                      controlPoint1: CGPoint(x: curveTwoControlOnePointX, y: curveControlTwoPointY),
+                      controlPoint2: CGPoint(x: curveTwoControlTwoPointX, y: curveControlOnePointY))
     }
     
     // MARK: - Private Properties
     private var shapeLayer: CAShapeLayer?
+    private var basicWidth: CGFloat {
+        guard let tabCount = self.items?.count else { return 1 }
+        return self.frame.width/CGFloat(2*tabCount)
+    }
 }

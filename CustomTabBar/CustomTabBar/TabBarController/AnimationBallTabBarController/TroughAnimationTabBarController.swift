@@ -32,6 +32,22 @@ class TroughAnimationTabBarController: UITabBarController {
         }
     }
     var highlightAnimationType = TabBarAnimationType.horizontal
+    var ballOffset: CGFloat = 20 {
+        didSet { updateBall() }
+    }
+    var ballSize: CGSize = CGSize(width: 50, height: 50) {
+        didSet { updateBall() }
+    }
+    var ballCornerRadius: CGFloat = 25 {
+        didSet { updateBall() }
+    }
+    var troughExtend: CGFloat = 60 {
+        didSet {
+            guard self.tabBar is TroughAnimationTabBar else { return }
+            let troughTabBar = self.tabBar as! TroughAnimationTabBar
+            troughTabBar.troughExtend = troughExtend
+        }
+    }
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,9 +85,9 @@ class TroughAnimationTabBarController: UITabBarController {
     }
     
     private func setupAnimationBall() {
-        animationItem = UIImageView(frame: CGRect(x: self.view.bounds.width/6-25, y: -20, width: 50, height: 50))
+        animationItem = UIImageView(frame: CGRect(origin: CGPoint(x: basicWidth-ballSize.height/2, y: -ballOffset), size: ballSize))
         animationItem.contentMode = .center
-        animationItem.layer.cornerRadius = 25
+        animationItem.layer.cornerRadius = ballCornerRadius
         animationItem.layer.masksToBounds = false
         animationItem.layer.shadowPath = UIBezierPath(roundedRect: animationItem.bounds, cornerRadius: animationItem.layer.cornerRadius).cgPath
         animationItem.layer.shadowColor = UIColor.black.cgColor
@@ -79,6 +95,12 @@ class TroughAnimationTabBarController: UITabBarController {
         animationItem.layer.shadowRadius = 2
         animationItem.layer.shadowOffset = CGSize(width: 0, height: 4)
         self.tabBar.addSubview(animationItem)
+    }
+    
+    private func updateBall() {
+        animationItem.frame = CGRect(origin: CGPoint(x: basicWidth-ballSize.height/2, y: -ballOffset), size: ballSize)
+        animationItem.layer.shadowPath = UIBezierPath(roundedRect: animationItem.bounds, cornerRadius: animationItem.layer.cornerRadius).cgPath
+        animationItem.layer.cornerRadius = ballCornerRadius
     }
     
     // MARK: - Event Responses
@@ -123,30 +145,22 @@ class TroughAnimationTabBarController: UITabBarController {
     }
     
     private func setAnimationItemFrame() {
-        if self.selectedIndex == 0 {
-            self.animationItem.frame = CGRect(x: self.view.bounds.width/6-25, y: -20, width: 50, height: 50)
-            animationItem.image = self.tabBar.items?[self.selectedIndex].image?.withTintColor(highlightTabIconColor)
-        } else if self.selectedIndex == 1 {
-            self.animationItem.frame = CGRect(x: (self.view.bounds.width*3/6)-25, y: -20, width: 50, height: 50)
-            animationItem.image = self.tabBar.items?[self.selectedIndex].image?.withTintColor(highlightTabIconColor)
-        } else if self.selectedIndex == 2 {
-            self.animationItem.frame = CGRect(x: (self.view.bounds.width*5/6)-25, y: -20, width: 50, height: 50)
-            animationItem.image = self.tabBar.items?[self.selectedIndex].image?.withTintColor(highlightTabIconColor)
-        }
+        guard let itemCount = self.tabBar.items?.count, self.selectedIndex < itemCount else { return }
+        self.animationItem.frame.origin.x = CGFloat(self.selectedIndex*2)*basicWidth+basicWidth-ballSize.width/2
+        animationItem.image = self.tabBar.items?[self.selectedIndex].image?.withTintColor(highlightTabIconColor)
     }
     
     fileprivate func createAnimationCirclePath() -> UIBezierPath {
-//        var isReverse = self.selectedIndex < self.previousIndex!
         let path = UIBezierPath()
+        let targetPointOneX = self.animationItem.frame.midX + CGFloat(self.selectedIndex-self.previousIndex!)*basicWidth
+        let controlPointOneX = self.animationItem.frame.midX
+        let targetPointTwoX = self.animationItem.frame.midX + CGFloat(self.selectedIndex-self.previousIndex!)*CGFloat(2)*basicWidth
+        let controlPointTwoX = self.animationItem.frame.midX + CGFloat(self.selectedIndex-self.previousIndex!)*CGFloat(2)*basicWidth
         path.move(to: CGPoint(x: self.animationItem.frame.midX, y: 5))
-        path.addQuadCurve(to: CGPoint(x: self.tabBar.frame.width*CGFloat((self.selectedIndex-1+1)*2-1+1)/6,
-                                      y: self.tabBar.frame.height/2),
-                          controlPoint: CGPoint(x: self.animationItem.frame.midX,
-                                                y: self.tabBar.frame.height/2))
-        path.addQuadCurve(to: CGPoint(x: self.tabBar.frame.width*CGFloat((self.selectedIndex-1+1)*2-1+2)/6,
-                                      y: 5),
-                          controlPoint: CGPoint(x: self.tabBar.frame.width*CGFloat((self.selectedIndex-1+1)*2-1+2)/6,
-                                                y: self.tabBar.frame.height/2))
+        path.addQuadCurve(to: CGPoint(x: targetPointOneX, y: self.tabBar.frame.height),
+                          controlPoint: CGPoint(x: controlPointOneX, y: self.tabBar.frame.height))
+        path.addQuadCurve(to: CGPoint(x: targetPointTwoX, y: 5),
+                          controlPoint: CGPoint(x: controlPointTwoX, y: self.tabBar.frame.height))
         return path
     }
     
@@ -203,6 +217,10 @@ class TroughAnimationTabBarController: UITabBarController {
     // MARK: - Private Properties
     private var animationItem = UIImageView()
     private var previousIndex: Int?
+    private var basicWidth: CGFloat {
+        guard let tabCount = self.tabBar.items?.count else { return 1 }
+        return self.tabBar.frame.width/CGFloat(2*tabCount)
+    }
 }
 
 extension TroughAnimationTabBarController: UITabBarControllerDelegate {

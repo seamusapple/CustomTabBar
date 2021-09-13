@@ -23,10 +23,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         secondController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "32_tinder"), selectedImage: nil)
         let thirdController = DemoViewController2()
         thirdController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "32_tumblr"), selectedImage: nil)
-        rootViewController.viewControllers = [firstController, secondController, thirdController]
+        let forthController = DemoViewController2()
+        forthController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "32_facebook"), selectedImage: nil)
+        rootViewController.viewControllers = [firstController, secondController, thirdController, forthController]
         rootViewController.tabBarBackgroundColor = UIColor(named: "CaribbeanGreen")!
         rootViewController.highlightTabIconColor = UIColor(named: "DarkWorld")!
         rootViewController.highlightAnimationType = .dropRise
+        rootViewController.ballCornerRadius = 25
+        rootViewController.ballOffset = 20
+        rootViewController.ballSize = CGSize(width: 50, height: 50)
+        rootViewController.troughExtend = 60
         window.rootViewController = rootViewController
         self.window = window
         window.makeKeyAndVisible()
