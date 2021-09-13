@@ -12,12 +12,14 @@ class TroughAnimationTabBar: UITabBar {
     // MARK: - Public Properties
     var currentSelectedIndex: Int = 0
     var nextIndex: Int = 0
+    var animationDuration: TimeInterval = 0.5
+    var tabBarBackgroundColor = UIColor(named: "GlossyGrape")!
     
     // MARK: - Private Methods
-    func animationTabBar(isAnimated: Bool) {
+    func animationTabBar() {
         guard self.currentSelectedIndex != self.nextIndex else { return }
         self.currentSelectedIndex = self.nextIndex
-        updateShape(isAnimated: isAnimated)
+        updateShape()
     }
     
     // Super Override
@@ -28,10 +30,10 @@ class TroughAnimationTabBar: UITabBar {
     }
     
     // MARK: - Private Methods
-    private func updateShape(isAnimated: Bool) {
+    private func updateShape() {
         let newPath = createPath()
         let animation = CABasicAnimation(keyPath: "path")
-        animation.duration = 1.0
+        animation.duration = animationDuration
         animation.fromValue = shapeLayer?.path
         animation.toValue = newPath
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
@@ -45,7 +47,7 @@ class TroughAnimationTabBar: UITabBar {
         shapeLayer = CAShapeLayer()
         shapeLayer?.path = createPath()
         shapeLayer?.strokeColor = UIColor.clear.cgColor
-        shapeLayer?.fillColor = UIColor(named: "GlossyGrape")?.cgColor
+        shapeLayer?.fillColor = tabBarBackgroundColor.cgColor
         shapeLayer?.lineWidth = 1.0
         
         guard shapeLayer != nil && shapeLayer!.superlayer == nil else { return }

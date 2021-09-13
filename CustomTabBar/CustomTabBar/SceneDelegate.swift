@@ -17,6 +17,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let rootViewController = TroughAnimationTabBarController()
         rootViewController.selectedIndex = 1
+        let firstController = DemoViewController()
+        firstController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "32_reddit"), selectedImage: nil)
+        let secondController = DemoViewController1()
+        secondController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "32_tinder"), selectedImage: nil)
+        let thirdController = DemoViewController2()
+        thirdController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "32_tumblr"), selectedImage: nil)
+        rootViewController.viewControllers = [firstController, secondController, thirdController]
+        rootViewController.tabBarBackgroundColor = UIColor(named: "CaribbeanGreen")!
+        rootViewController.highlightTabIconColor = UIColor(named: "DarkWorld")!
         window.rootViewController = rootViewController
         self.window = window
         window.makeKeyAndVisible()
