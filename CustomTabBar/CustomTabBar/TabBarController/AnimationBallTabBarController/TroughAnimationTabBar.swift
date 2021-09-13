@@ -24,7 +24,7 @@ class TroughAnimationTabBar: UITabBar {
     override func draw(_ rect: CGRect) {
         self.addShape()
         self.unselectedItemTintColor = .black
-        self.tintColor = UIColor(named: "DeepSaffron")
+        self.tintColor = .black
     }
     
     // MARK: - Private Methods

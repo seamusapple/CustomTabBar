@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         let rootViewController = TroughAnimationTabBarController()
-        rootViewController.selectedIndex = 0
+        rootViewController.selectedIndex = 1
         window.rootViewController = rootViewController
         self.window = window
         window.makeKeyAndVisible()
