@@ -14,10 +14,10 @@ class TroughAnimationTabBar: UITabBar {
     var nextIndex: Int = 0
     
     // MARK: - Private Methods
-    func animationTabBar() {
-        print("Need animation from index: \(currentSelectedIndex) to index: \(nextIndex)")
+    func animationTabBar(isAnimated: Bool) {
+        guard self.currentSelectedIndex != self.nextIndex else { return }
         self.currentSelectedIndex = self.nextIndex
-        addShape()
+        updateShape(isAnimated: isAnimated)
     }
     
     // Super Override
@@ -28,24 +28,28 @@ class TroughAnimationTabBar: UITabBar {
     }
     
     // MARK: - Private Methods
+    private func updateShape(isAnimated: Bool) {
+        let newPath = createPath()
+        let animation = CABasicAnimation(keyPath: "path")
+        animation.duration = 1.0
+        animation.fromValue = shapeLayer?.path
+        animation.toValue = newPath
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        shapeLayer?.add(animation, forKey: "path")
+        shapeLayer?.path = newPath
+    }
+    
     private func addShape() {
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = createPath()
-        shapeLayer.strokeColor = UIColor.clear.cgColor
-        shapeLayer.fillColor = UIColor(named: "GlossyGrape")?.cgColor
-        shapeLayer.lineWidth = 1.0
+        shapeLayer = CAShapeLayer()
+        shapeLayer?.path = createPath()
+        shapeLayer?.strokeColor = UIColor.clear.cgColor
+        shapeLayer?.fillColor = UIColor(named: "GlossyGrape")?.cgColor
+        shapeLayer?.lineWidth = 1.0
         
-        shapeLayer.shadowOffset = CGSize(width: 0, height: 0)
-        shapeLayer.shadowRadius = 10
-        shapeLayer.shadowColor = UIColor(named: "GlossyGrape")?.cgColor
-        shapeLayer.shadowOpacity = 0.3
-        
-        if let oldShapeLayer = self.shapeLayer {
-            self.layer.replaceSublayer(oldShapeLayer, with: shapeLayer)
-        } else {
-            self.layer.insertSublayer(shapeLayer, at: 0)
-        }
-        self.shapeLayer = shapeLayer
+        guard shapeLayer != nil && shapeLayer!.superlayer == nil else { return }
+        self.layer.insertSublayer(shapeLayer!, at: 0)
     }
 
     private func createPath() -> CGPath {
@@ -78,5 +82,5 @@ class TroughAnimationTabBar: UITabBar {
     }
     
     // MARK: - Private Properties
-    private var shapeLayer: CALayer?
+    private var shapeLayer: CAShapeLayer?
 }

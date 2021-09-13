@@ -33,9 +33,9 @@ class TroughAnimationTabBarController: UITabBarController {
         guard self.tabBar is TroughAnimationTabBar else { return }
         let troughTabBar = self.tabBar as! TroughAnimationTabBar
         troughTabBar.nextIndex = selectedIndex
-        troughTabBar.animationTabBar()
         updateAnimationBarFrame()
         updateItemImage()
+        troughTabBar.animationTabBar(isAnimated: true)
     }
     
     // MARK: - Private Methods
@@ -44,12 +44,7 @@ class TroughAnimationTabBarController: UITabBarController {
         setupControllers()
         setupAnimationBall()
         self.delegate = self
-        self.selectedIndex = 1
         addObserver(self, forKeyPath: "selectedIndex", options: .new, context: nil)
-        guard self.tabBar is TroughAnimationTabBar else { return }
-        let troughTabBar = self.tabBar as! TroughAnimationTabBar
-        troughTabBar.currentSelectedIndex = 1
-        troughTabBar.nextIndex = 1
     }
     
     private func setupTabBar() {
@@ -75,14 +70,16 @@ class TroughAnimationTabBarController: UITabBarController {
     
     private func setupAnimationBall() {
         animationItem = UIImageView(frame: CGRect(x: (self.view.bounds.width/2)-25, y: -20, width: 50, height: 50))
-        animationItem.contentMode = .scaleAspectFit
+        animationItem.contentMode = .center
         animationItem.image = UIImage(named: "32_tinder")?.withTintColor(UIColor(named: "DeepSaffron")!)
         animationItem.backgroundColor = UIColor(named: "GlossyGrape")
+        animationItem.layer.cornerRadius = 25
+        animationItem.layer.masksToBounds = false
+        animationItem.layer.shadowPath = UIBezierPath(roundedRect: animationItem.bounds, cornerRadius: animationItem.layer.cornerRadius).cgPath
         animationItem.layer.shadowColor = UIColor.black.cgColor
         animationItem.layer.shadowOpacity = 0.15
         animationItem.layer.shadowRadius = 2
         animationItem.layer.shadowOffset = CGSize(width: 0, height: 4)
-        animationItem.layer.cornerRadius = 25
         
         self.tabBar.addSubview(animationItem)
     }
