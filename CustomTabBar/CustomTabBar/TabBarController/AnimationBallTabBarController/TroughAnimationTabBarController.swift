@@ -17,7 +17,7 @@ class TroughAnimationTabBarController: UITabBarController {
     // MARK: - Public Methods
     
     // MARK: - Public Properties
-    var animationDuration: TimeInterval = 0.5
+    var animationDuration: TimeInterval = 0.3
     var tabBarBackgroundColor = UIColor(named: "GlossyGrape")! {
         didSet {
             animationItem.backgroundColor = tabBarBackgroundColor
