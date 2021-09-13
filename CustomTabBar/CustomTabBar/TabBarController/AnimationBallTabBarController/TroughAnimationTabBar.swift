@@ -9,22 +9,25 @@ import UIKit
 
 @IBDesignable
 class TroughAnimationTabBar: UITabBar {
+    // MARK: - Public Properties
     var currentSelectedIndex: Int = 0
     var nextIndex: Int = 0
+    
+    // MARK: - Private Methods
     func animationTabBar() {
         print("Need animation from index: \(currentSelectedIndex) to index: \(nextIndex)")
         self.currentSelectedIndex = self.nextIndex
         addShape()
     }
     
-    private var shapeLayer: CALayer?
-    
+    // Super Override
     override func draw(_ rect: CGRect) {
         self.addShape()
         self.unselectedItemTintColor = .black
         self.tintColor = UIColor(named: "DeepSaffron")
     }
     
+    // MARK: - Private Methods
     private func addShape() {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = createPath()
@@ -73,4 +76,7 @@ class TroughAnimationTabBar: UITabBar {
             path.addCurve(to: CGPoint(x: self.frame.width*5/6+60, y: 0), controlPoint1: CGPoint(x: self.frame.width*5/6+40, y: centerHeight*8.5/10), controlPoint2: CGPoint(x: self.frame.width*5/6+20, y: centerHeight/8))
         }
     }
+    
+    // MARK: - Private Properties
+    private var shapeLayer: CALayer?
 }
