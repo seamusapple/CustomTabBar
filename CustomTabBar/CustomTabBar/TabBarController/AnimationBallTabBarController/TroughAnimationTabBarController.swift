@@ -39,6 +39,7 @@ class TroughAnimationTabBarController: UITabBarController {
         guard self.tabBar is TroughAnimationTabBar else { return }
         let troughTabBar = self.tabBar as! TroughAnimationTabBar
         troughTabBar.currentSelectedIndex = 1
+        troughTabBar.nextIndex = 1
         view.layoutIfNeeded()
     }
     
@@ -90,9 +91,42 @@ class TroughAnimationTabBarController: UITabBarController {
         troughTabBar.currentSelectedIndex = self.selectedIndex
         troughTabBar.nextIndex = 1
         troughTabBar.animationTabBar()
+        updateAnimationBarFrame()
+        updateItemImage()
     }
     
     // MARK: - Private Methods
+    private func updateAnimationBarFrame() {
+        if self.selectedIndex == 0 {
+            animationButton.frame = CGRect(x: self.view.bounds.width/6-25, y: -20, width: 50, height: 50)
+        } else if self.selectedIndex == 1 {
+            animationButton.frame = CGRect(x: (self.view.bounds.width*3/6)-25, y: -20, width: 50, height: 50)
+        } else if self.selectedIndex == 2 {
+            animationButton.frame = CGRect(x: (self.view.bounds.width*5/6)-25, y: -20, width: 50, height: 50)
+        }
+    }
+    
+    private func updateItemImage() {
+        if self.selectedIndex == 0 {
+            animationButton.setImage(UIImage(named: "32_reddit"), for: .normal)
+            animationButton.setImage(UIImage(named: "32_reddit")?.withTintColor(UIColor(named: "DeepSaffron")!, renderingMode: .alwaysTemplate), for: .selected)
+            self.tabBar.items?.first?.image = nil
+            self.tabBar.items?[1].image = UIImage(named: "32_tinder")
+            self.tabBar.items?[2].image = UIImage(named: "32_tumblr")
+        } else if self.selectedIndex == 1 {
+            animationButton.setImage(UIImage(named: "32_tinder"), for: .normal)
+            animationButton.setImage(UIImage(named: "32_tinder")?.withTintColor(UIColor(named: "DeepSaffron")!, renderingMode: .alwaysTemplate), for: .selected)
+            self.tabBar.items?.first?.image = UIImage(named: "32_reddit")
+            self.tabBar.items?[1].image = nil
+            self.tabBar.items?[2].image = UIImage(named: "32_tumblr")
+        } else if self.selectedIndex == 2 {
+            animationButton.setImage(UIImage(named: "32_tumblr"), for: .normal)
+            animationButton.setImage(UIImage(named: "32_tumblr")?.withTintColor(UIColor(named: "DeepSaffron")!, renderingMode: .alwaysTemplate), for: .selected)
+            self.tabBar.items?.first?.image = UIImage(named: "32_reddit")
+            self.tabBar.items?[1].image = UIImage(named: "32_tinder")
+            self.tabBar.items?[2].image = nil
+        }
+    }
     
     // MARK: - Private Properties
     private var animationButton = UIButton()
@@ -100,15 +134,13 @@ class TroughAnimationTabBarController: UITabBarController {
 
 extension TroughAnimationTabBarController: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item.tag != 1 {
-            animationButton.isSelected = false
-        } else {
-            animationButton.isSelected = true
-        }
+        self.selectedIndex = item.tag
         guard self.tabBar is TroughAnimationTabBar else { return }
         let troughTabBar = self.tabBar as! TroughAnimationTabBar
         troughTabBar.currentSelectedIndex = self.selectedIndex
         troughTabBar.nextIndex = item.tag
         troughTabBar.animationTabBar()
+        updateAnimationBarFrame()
+        updateItemImage()
     }
 }
