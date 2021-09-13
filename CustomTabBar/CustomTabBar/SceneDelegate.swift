@@ -15,6 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
+        
         let rootViewController = TroughAnimationTabBarController()
         rootViewController.selectedIndex = 1
         let firstController = DemoViewController()
@@ -23,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         secondController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "32_tinder"), selectedImage: nil)
         let thirdController = DemoViewController2()
         thirdController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "32_tumblr"), selectedImage: nil)
-        let forthController = DemoViewController2()
+        let forthController = ViewController()
         forthController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "32_facebook"), selectedImage: nil)
         rootViewController.viewControllers = [firstController, secondController, thirdController, forthController]
         rootViewController.tabBarBackgroundColor = UIColor(named: "CaribbeanGreen")!
@@ -33,6 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootViewController.ballOffset = 20
         rootViewController.ballSize = CGSize(width: 50, height: 50)
         rootViewController.troughExtend = 60
+        
         window.rootViewController = rootViewController
         self.window = window
         window.makeKeyAndVisible()
