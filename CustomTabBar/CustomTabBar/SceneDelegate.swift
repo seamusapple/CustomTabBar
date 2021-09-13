@@ -26,6 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootViewController.viewControllers = [firstController, secondController, thirdController]
         rootViewController.tabBarBackgroundColor = UIColor(named: "CaribbeanGreen")!
         rootViewController.highlightTabIconColor = UIColor(named: "DarkWorld")!
+        rootViewController.highlightAnimationType = .dropRise
         window.rootViewController = rootViewController
         self.window = window
         window.makeKeyAndVisible()

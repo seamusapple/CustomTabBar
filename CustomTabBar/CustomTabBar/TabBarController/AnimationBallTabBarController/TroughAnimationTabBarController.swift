@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum TabBarAnimationType {
+    case horizontal
+    case dropRise
+}
+
 class TroughAnimationTabBarController: UITabBarController {
 
     // MARK: - Public Methods
@@ -26,6 +31,7 @@ class TroughAnimationTabBarController: UITabBarController {
             animationItem.image = self.tabBar.items?[self.selectedIndex].image?.withTintColor(highlightTabIconColor)
         }
     }
+    var highlightAnimationType = TabBarAnimationType.horizontal
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +78,6 @@ class TroughAnimationTabBarController: UITabBarController {
         animationItem.layer.shadowOpacity = 0.15
         animationItem.layer.shadowRadius = 2
         animationItem.layer.shadowOffset = CGSize(width: 0, height: 4)
-        
         self.tabBar.addSubview(animationItem)
     }
     
@@ -84,7 +89,7 @@ class TroughAnimationTabBarController: UITabBarController {
         guard self.tabBar is TroughAnimationTabBar else { return }
         let troughTabBar = self.tabBar as! TroughAnimationTabBar
         troughTabBar.nextIndex = selectedIndex
-        updateAnimationBar()
+        updateAnimationCircle()
         updateItemImage()
         troughTabBar.animationTabBar()
     }
@@ -96,13 +101,22 @@ class TroughAnimationTabBarController: UITabBarController {
         }
     }
     
-    private func updateAnimationBar() {
+    private func updateAnimationCircle() {
         guard previousIndex != nil else {
             animationItem.image = self.tabBar.items?[self.selectedIndex].image?.withTintColor(highlightTabIconColor)
             animationItem.backgroundColor = tabBarBackgroundColor
             setAnimationItemFrame()
             return
         }
+        switch highlightAnimationType {
+        case .horizontal:
+            horizontalAnimationCircle()
+        case .dropRise:
+            dropRiseAnimationCircle()
+        }
+    }
+    
+    private func horizontalAnimationCircle() {
         UIView.animate(withDuration: animationDuration) { [unowned self] in
             setAnimationItemFrame()
         }
@@ -119,6 +133,32 @@ class TroughAnimationTabBarController: UITabBarController {
             self.animationItem.frame = CGRect(x: (self.view.bounds.width*5/6)-25, y: -20, width: 50, height: 50)
             animationItem.image = self.tabBar.items?[self.selectedIndex].image?.withTintColor(highlightTabIconColor)
         }
+    }
+    
+    fileprivate func createAnimationCirclePath() -> UIBezierPath {
+//        var isReverse = self.selectedIndex < self.previousIndex!
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: self.animationItem.frame.midX, y: 5))
+        path.addQuadCurve(to: CGPoint(x: self.tabBar.frame.width*CGFloat((self.selectedIndex-1+1)*2-1+1)/6,
+                                      y: self.tabBar.frame.height/2),
+                          controlPoint: CGPoint(x: self.animationItem.frame.midX,
+                                                y: self.tabBar.frame.height/2))
+        path.addQuadCurve(to: CGPoint(x: self.tabBar.frame.width*CGFloat((self.selectedIndex-1+1)*2-1+2)/6,
+                                      y: 5),
+                          controlPoint: CGPoint(x: self.tabBar.frame.width*CGFloat((self.selectedIndex-1+1)*2-1+2)/6,
+                                                y: self.tabBar.frame.height/2))
+        return path
+    }
+    
+    private func dropRiseAnimationCircle() {
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        animation.path = createAnimationCirclePath().cgPath
+        animation.duration = animationDuration
+        animation.isRemovedOnCompletion = true
+        animation.fillMode = .forwards
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animationItem.layer.add(animation, forKey: "dropRiseAnimation")
+        setAnimationItemFrame()
     }
     
     private func updateItemImage() {
