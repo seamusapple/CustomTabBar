@@ -10,12 +10,21 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
         
+        configRootAsTroughBallAnimationTabController(window)
+        
+//        configRootAsExtendAnimationTabController(window)
+        
+        self.window = window
+        window.makeKeyAndVisible()
+    }
+
+    private func configRootAsTroughBallAnimationTabController(_ window: UIWindow) {
         let rootViewController = TroughAnimationTabBarController()
         rootViewController.selectedIndex = 1
         let firstController = DemoViewController()
@@ -34,12 +43,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootViewController.ballOffset = 20
         rootViewController.ballSize = CGSize(width: 50, height: 50)
         rootViewController.troughExtend = 60
-        
         window.rootViewController = rootViewController
-        self.window = window
-        window.makeKeyAndVisible()
     }
-
+    
     private func configRootAsExtendAnimationTabController(_ window: UIWindow) {
         let rootViewController = RootStackTabViewController()
         rootViewController.viewControllers = [ViewController(), DemoViewController(), DemoViewController1(), DemoViewController2()]
