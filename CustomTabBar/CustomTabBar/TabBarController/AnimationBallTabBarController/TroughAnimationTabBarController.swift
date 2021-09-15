@@ -55,6 +55,12 @@ class TroughAnimationTabBarController: UITabBarController {
         initSubComponents()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        updateAnimationBall()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
